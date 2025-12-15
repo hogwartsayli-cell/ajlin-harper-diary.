@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Universes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #FFF6F0;
+      color: #4B3B3B;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 50px;
+      color: #F5A9B8;
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #4B3B3B;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #F5A9B8;
+    }
+    .add-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #F5A9B8;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 0 50px 50px 50px;
+    }
+    .universe-card {
+      background-color: #FFEFEF;
+      border-radius: 15px;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .universe-card:hover {
+      transform: scale(1.05);
+    }
+    .universe-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .universe-name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #4B3B3B;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-family: 'Playfair Display', serif;
+    }
+    button {
+      background-color: #F5A9B8;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #E890A0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Universes</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="ajlin.html">Ajlin's Characters</a>
+  <a href="harper.html">Harper's Characters</a>
+  <a href="plots.html">Plots</a>
+</nav>
+
+<!-- Add Universe Button -->
+<button class="add-button" onclick="openForm()">＋</button>
+
+<!-- Universe Grid -->
+<div class="grid" id="universeGrid">
+  <!-- Universes will appear here -->
+</div>
+
+<!-- Modal Form -->
+<div id="formModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+  <div style="background:#FFF6F0; max-width:500px; margin:100px auto; padding:20px; border-radius:15px; position:relative;">
+    <h2>New Universe</h2>
+    <form id="universeForm">
+      <label>Universe Name:</label><br>
+      <input type="text" name="name" required><br>
+      <label>Image URL:</label><br>
+      <input type="text" name="image" required><br><br>
+      <button type="submit">Add Universe</button>
+      <button type="button" onclick="closeForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openForm() {
+    document.getElementById('formModal').style.display = 'block';
+  }
+  function closeForm() {
+    document.getElementById('formModal').style.display = 'none';
+  }
+
+  document.getElementById('universeForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const universe = {
+      name: form.name.value,
+      image: form.image.value
+    };
+
+    const card = document.createElement('div');
+    card.className = 'universe-card';
+    card.innerHTML = `
+      <img src="${universe.image}" alt="${universe.name}">
+      <div class="universe-name">${universe.name}</div>
+    `;
+    card.onclick = () => {
+      alert(`Universe: ${universe.name}`);
+    }
+
+    document.getElementById('universeGrid').appendChild(card);
+    closeForm();
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
