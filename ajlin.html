@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajlin's Characters</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Playfair Display', serif;
+      background-color: #FFF6F0;
+      color: #4B3B3B;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 50px;
+      color: #F5A9B8;
+      margin: 0;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    nav a {
+      text-decoration: none;
+      color: #4B3B3B;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #F5A9B8;
+    }
+    .add-button {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #F5A9B8;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 20px;
+      padding: 0 50px 50px 50px;
+    }
+    .character-card {
+      background-color: #FFEFEF;
+      border-radius: 15px;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .character-card:hover {
+      transform: scale(1.05);
+    }
+    .character-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .character-name {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #4B3B3B;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Ajlin's Characters</h1>
+</header>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="harper.html">Harper's Characters</a>
+  <a href="plots.html">Plots</a>
+  <a href="universes.html">Universes</a>
+</nav>
+
+<!-- Add Character Button -->
+<button class="add-button" onclick="openForm()">＋</button>
+
+<!-- Character Grid -->
+<div class="grid" id="characterGrid">
+  <!-- Characters will appear here -->
+</div>
+
+<!-- Modal Form -->
+<div id="formModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5);">
+  <div style="background:#FFF6F0; max-width:500px; margin:100px auto; padding:20px; border-radius:15px; position:relative;">
+    <h2>Character Submission</h2>
+    <form id="characterForm">
+      <label>Name:</label><br>
+      <input type="text" name="name" required><br>
+      <label>Age:</label><br>
+      <input type="text" name="age"><br>
+      <label>Place of Birth:</label><br>
+      <input type="text" name="birth"><br>
+      <label>Place of Living:</label><br>
+      <input type="text" name="living"><br>
+      <label>Appearance:</label><br>
+      <textarea name="appearance"></textarea><br>
+      <label>Personality:</label><br>
+      <textarea name="personality"></textarea><br>
+      <label>Background:</label><br>
+      <textarea name="background"></textarea><br>
+      <label>Strengths:</label><br>
+      <textarea name="strengths"></textarea><br>
+      <label>Weaknesses:</label><br>
+      <textarea name="weaknesses"></textarea><br>
+      <label>Notes:</label><br>
+      <textarea name="notes"></textarea><br>
+      <label>Image URL:</label><br>
+      <input type="text" name="image"><br><br>
+      <button type="submit">Add Character</button>
+      <button type="button" onclick="closeForm()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  // Open & Close Modal
+  function openForm() {
+    document.getElementById('formModal').style.display = 'block';
+  }
+  function closeForm() {
+    document.getElementById('formModal').style.display = 'none';
+  }
+
+  // Add character to grid
+  document.getElementById('characterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const form = e.target;
+    const character = {
+      name: form.name.value,
+      age: form.age.value,
+      birth: form.birth.value,
+      living: form.living.value,
+      appearance: form.appearance.value,
+      personality: form.personality.value,
+      background: form.background.value,
+      strengths: form.strengths.value,
+      weaknesses: form.weaknesses.value,
+      notes: form.notes.value,
+      image: form.image.value
+    };
+
+    // Create card
+    const card = document.createElement('div');
+    card.className = 'character-card';
+    card.innerHTML = `
+      <img src="${character.image}" alt="${character.name}">
+      <div class="character-name">${character.name}</div>
+    `;
+    card.onclick = () => {
+      alert(`
+Name: ${character.name}
+Age: ${character.age}
+Place of Birth: ${character.birth}
+Place of Living: ${character.living}
+Appearance: ${character.appearance}
+Personality: ${character.personality}
+Background: ${character.background}
+Strengths: ${character.strengths}
+Weaknesses: ${character.weaknesses}
+Notes: ${character.notes}
+      `);
+    }
+
+    document.getElementById('characterGrid').appendChild(card);
+    closeForm();
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
