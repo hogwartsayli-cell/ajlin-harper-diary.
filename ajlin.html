@@ -181,20 +181,17 @@ Notes: ${character.notes}
     closeForm();
     form.reset();
   });
-</script>
-
-</body>
-</html>
+<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
   const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+    apiKey: "AIzaSyD79LKtPlRxw8gbeBVM6YHAYWLZMKViIS8",
+    authDomain: "ajlin-and-harper-diary.firebaseapp.com",
+    projectId: "ajlin-and-harper-diary",
+    storageBucket: "ajlin-and-harper-diary.firebasestorage.app",
+    messagingSenderId: "495788215286",
+    appId: "1:495788215286:web:ac83a6a539ed519eab55d7"
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
